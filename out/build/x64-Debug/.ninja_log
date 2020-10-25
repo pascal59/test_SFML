@@ -1,0 +1,5 @@
+# ninja log v5
+1	553	625296405	CMakeFiles/SFML_Test.dir/Car.cpp.obj	3f0cc760f73dab7f
+6	559	625296405	CMakeFiles/SFML_Test.dir/Runner.cpp.obj	5be9f9a39c328209
+4	576	625296405	CMakeFiles/SFML_Test.dir/main.cpp.obj	2f43e03568d62d08
+577	1235	625296406	SFML_Test.exe	fc0d1f85c446f4f6
