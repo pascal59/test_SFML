@@ -1,3 +1,0 @@
-C:/Users/pmo/source/repos/test_SFML/out/build/x64-Debug/CMakeFiles/SFML_Test.dir
-C:/Users/pmo/source/repos/test_SFML/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/pmo/source/repos/test_SFML/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
