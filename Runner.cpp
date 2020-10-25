@@ -1,45 +1,35 @@
-#include "Car.hpp"
+#include "Runner.hpp"
 
-Runner::Runner(float x, float y, float angle, float speed,
-               sf::IntRect &rect, int shift_x, int shift_y) : 
-               shift_x(shift_x), shift_y(shift_y), rect(rect), Car(x, y, angle, speed){}
+Runner::Runner(sf::IntRect &rect, int shift_x, int shift_y, Car &car) : shift_x_(shift_x), shift_y_(shift_y), rect_(rect), car_(car) {}
 
-void Runner::speedUp() {
-    Car::speedUp();
-    if (clock.getElapsedTime().asSeconds() > 0.08)
-    {
-        rect.left = rect.left + 102;
+void Runner::speedUp()
+{
+    if (clock.getElapsedTime().asSeconds() > 0.08) {
+        rect_.left = rect_.left + 102;
 
-        if (rect.left >= 1020)
+        if (rect_.left >= 1020)
         {
-            //rect.top = 270;
-            rect.left = 204;
-        }
-        else if (rect.top > 200 && rect.left > 190)
-        {
-            rect.top = 180;
-            rect.left = 0;
+            rect_.left = 204;
         }
         clock.restart();
     }
-    else
-    {
-    }
 }
 
-void Runner::speedDown()
-{
-    Car::speedDown();
-    rect.top = 0;
-    rect.left = 0;
+void Runner::speedDown() {
+    rect_.top = 0;
+    rect_.left = 0;
 }
 
-void Runner::turnLeft()
-{
+float Runner::getX() const {
+    float angle = car_.getAngle() * M_PI / 180.0;
+    
+    auto dx = cos(M_PI + angle) * shift_x_ + sin(M_PI + angle) * shift_y_;
+    return car_.getX() + dx;
+}
 
-    Car::turnLeft();
-    Car::move(static_cast<float>((cos(Car::getAngle()* M_PI / 180.0)+
-    cos(1.f * M_PI / 180.0))*shift_x)/100,
-              static_cast<float>((sin(Car::getAngle()* M_PI / 180.0)-
-    sin(1.f * M_PI / 180.0))*shift_x)/100);
+float Runner::getY() const {
+    float angle = car_.getAngle() * M_PI / 180.0;
+    
+    auto dy = sin(M_PI + angle) * shift_x_ + cos(M_PI + angle) * shift_y_;
+    return car_.getY() + dy;
 }

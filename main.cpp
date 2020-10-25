@@ -3,32 +3,32 @@
 #include <SFML/Graphics.hpp>
 
 #include "Car.hpp"
+#include "Runner.hpp"
 
 using namespace std;
 using namespace sf;
 
 
-int main()
-{
+int main() {
 	// Fenêtre
 	const Vector2u WINDOW_SIZE(800, 600);
 	
-	RenderWindow app(VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y, 32), "TP Camera");
+	RenderWindow app(VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y, 32), "My Camera");
 
 	// Frames Per Second (FPS)
 	app.setFramerateLimit(60); // limite la fenêtre à 60 images par seconde
 
 	// Fond d'écran
-	Texture backgroundImage, carImage, player_Image;
-	Sprite backgroundSprite, carSprite, player_Sprite;
+	Texture backgroundImage, carImage, runnerImage;
+	Sprite backgroundSprite, carSprite, runnerSprite;
 
 	if (!backgroundImage.loadFromFile("../img/background.png") ||
 		!carImage.loadFromFile("../img/car.png") ||
-		!player_Image.loadFromFile("../img/Player_forward.png"))
-	{
+		!runnerImage.loadFromFile("../img/runner.png")) {
 		cerr << "Erreur pendant le chargement des images" << endl;
 		return EXIT_FAILURE; // On ferme le programme
 	}
+
 	backgroundSprite.setTexture(backgroundImage);
 	carSprite.setTexture(carImage);
 	carSprite.setPosition(sf::Vector2f(20, 34));
@@ -45,20 +45,19 @@ int main()
 	constexpr int shift_x = 50;
 	constexpr int shift_y = 10;
 
-	player_Sprite.setTexture(player_Image);
-	player_Sprite.setTextureRect(rect);
-	player_Sprite.setPosition(sf::Vector2f(790 - shift_x, 1215 - shift_y));
-	player_Sprite.setScale(sf::Vector2f(0.3f, 0.3f));
+	runnerSprite.setTexture(runnerImage);
+	runnerSprite.setTextureRect(rect);
+	runnerSprite.setScale(sf::Vector2f(0.3f, 0.3f));
 
 	Car car(790, 1215, 0, 0);
-	Runner runner(790 - shift_x, 1215 - shift_y, 0, 0, rect, shift_x, shift_y);
+	Runner runner(rect, shift_x, shift_y, car);
 
 	Vector2f center(car.getX(), car.getY());
-	player_Sprite.setPosition(sf::Vector2f(car.getX() - shift_x, car.getY() - shift_y));
 
 	Vector2f halfSize(WINDOW_SIZE.x / 2.f, WINDOW_SIZE.y / 2.f);
 
 	View view(center, halfSize);
+
 	app.setView(view);
 	
 	while (app.isOpen()) // Boucle principale
@@ -73,25 +72,21 @@ int main()
 		}
 
 		car.move();
-		runner.move();
 		view.setCenter(car.getX(), car.getY());
 
 		app.setView(view);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))	{
 			car.turnLeft();
 			carSprite.setRotation(car.getAngle());
-			runner.turnLeft();
-			player_Sprite.setRotation(car.getAngle());
+			runnerSprite.setRotation(car.getAngle());
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
 			car.turnRight();
 			carSprite.setRotation(car.getAngle());
-			runner.turnRight();
-			player_Sprite.setRotation(car.getAngle());
+			runnerSprite.setRotation(car.getAngle());
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -110,10 +105,10 @@ int main()
 		app.draw(backgroundSprite);
 
 		carSprite.setPosition(car.getX(), car.getY());
-		player_Sprite.setPosition(runner.getX(), runner.getY());
-		player_Sprite.setTextureRect(rect);
+		runnerSprite.setPosition(runner.getX(), runner.getY());
+		runnerSprite.setTextureRect(rect);
 		app.draw(carSprite);
-		app.draw(player_Sprite);
+		app.draw(runnerSprite);
 
 		app.display();
 	}

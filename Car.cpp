@@ -30,13 +30,6 @@ Car::move()
 }
 
 void
-Car::move(float dx, float dy){
-    _x += dx;
-    _y += dy;
-}
-
-
-void
 Car::turnLeft()
 {
     _angle += 1.f;

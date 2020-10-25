@@ -14,8 +14,6 @@ public:
 
 	void move();
 
-	void move(float dx, float dy);
-
 	void turnLeft();
 	void turnRight();
 	void speedUp();
@@ -25,24 +23,4 @@ private:
 	float _x, _y;
 	float _angle;
 	float _speed;
-};
-
-class Runner : public Car
-{
-private:
-	sf::Clock clock;
-	sf::IntRect &rect;
-	int shift_x;
-	int shift_y;
-
-public:
-	Runner(float x, float y, float angle, float speed,
-		   sf::IntRect &rect, int shift_x, int shift_y);
-
-	void speedUp();
-	void speedDown();
-
-
-	void turnLeft();
-
 };
