@@ -82,15 +82,13 @@ int main() {
 			runnerSprite.setRotation(car.getAngle());
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 			car.turnRight();
 			carSprite.setRotation(car.getAngle());
 			runnerSprite.setRotation(car.getAngle());
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 			car.speedUp();
 			runner.speedUp();
 		}
