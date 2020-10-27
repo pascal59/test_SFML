@@ -21,15 +21,15 @@ void Runner::speedDown() {
 }
 
 float Runner::getX() const {
-    float angle = car_.getAngle() * M_PI / 180.0;
+    float angle = static_cast<float>(car_.getAngle() * M_PI / 180.0f);
     
-    auto dx = cos(M_PI + angle) * shift_x_ + sin(M_PI + angle) * shift_y_;
+    float dx = static_cast<float>(cos(M_PI + angle) * shift_x_ + sin(M_PI + angle) * shift_y_);
     return car_.getX() + dx;
 }
 
 float Runner::getY() const {
-    float angle = car_.getAngle() * M_PI / 180.0;
+    float angle = static_cast<float>(car_.getAngle() * M_PI / 180.0f);
     
-    auto dy = sin(M_PI + angle) * shift_x_ + cos(M_PI + angle) * shift_y_;
+    auto dy = static_cast<float>(sin(M_PI + angle) * shift_x_ + cos(M_PI + angle) * shift_y_);
     return car_.getY() + dy;
 }
