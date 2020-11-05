@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "Car.hpp"
-#include "Runner.hpp"
 
 using namespace std;
 using namespace sf;
@@ -56,7 +55,6 @@ int main() {
 	runnerSprite.setScale(sf::Vector2f(0.3f, 0.3f));
 
 	Car car(790, 1215, 0, 0);
-	Runner runner(rect, shift_x, shift_y, car);
 
 	Vector2f center(car.getX(), car.getY());
 

@@ -26,7 +26,7 @@ SET(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
 
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
-set(TEST_SRCS "main.cpp" "Car.cpp" "Runner.cpp")
+set(TEST_SRCS "main.cpp" "Car.cpp")
 
 add_executable (SFML_Test ${TEST_SRCS})
 target_link_libraries(SFML_Test sfml-graphics sfml-window)
