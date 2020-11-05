@@ -8,6 +8,13 @@
 using namespace std;
 using namespace sf;
 
+#ifdef _MSC_VER 
+#define _PATH_IMG_ "../../../img/"
+#else
+#define _PATH_IMG_ "../img/"
+#endif
+
+const std::string path_image(_PATH_IMG_);
 
 int main() {
 	// Fenêtre
@@ -22,9 +29,8 @@ int main() {
 	Texture backgroundImage, carImage, runnerImage;
 	Sprite backgroundSprite, carSprite, runnerSprite;
 
-	if (!backgroundImage.loadFromFile("../img/background.png") ||
-		!carImage.loadFromFile("../img/car.png") ||
-		!runnerImage.loadFromFile("../img/runner.png")) {
+	if (!backgroundImage.loadFromFile(path_image+"background.png") ||
+		!carImage.loadFromFile(path_image+"car.png")) {
 		cerr << "Erreur pendant le chargement des images" << endl;
 		return EXIT_FAILURE; // On ferme le programme
 	}
@@ -79,23 +85,19 @@ int main() {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))	{
 			car.turnLeft();
 			carSprite.setRotation(car.getAngle());
-			runnerSprite.setRotation(car.getAngle());
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 			car.turnRight();
 			carSprite.setRotation(car.getAngle());
-			runnerSprite.setRotation(car.getAngle());
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 			car.speedUp();
-			runner.speedUp();
 		}
 		else
 		{
 			car.speedDown();
-			runner.speedDown();
 		}
 
 		// Affichages
@@ -103,10 +105,8 @@ int main() {
 		app.draw(backgroundSprite);
 
 		carSprite.setPosition(car.getX(), car.getY());
-		runnerSprite.setPosition(runner.getX(), runner.getY());
-		runnerSprite.setTextureRect(rect);
+
 		app.draw(carSprite);
-		app.draw(runnerSprite);
 
 		app.display();
 	}
